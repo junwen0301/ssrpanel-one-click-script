@@ -1,19 +1,20 @@
 #!/bin/bash
-#Time: 2017年11月1日16:40:29
+#Time: 2017年11月2日17:14:50
 #Author: 十一
 #Blog: blog.67cc.cn
+#GitHub版
 [ $(id -u) != "0" ] && { echo "错误：你必须使用root用户登录"; exit 1; }
 function install_ssrpanel(){
 	yum -y remove httpd
 	yum install -y unzip zip git
-	wget -c https://gitee.com/marisn/ssrpanel-new/raw/master/lnmp1.4.zip && unzip lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
+	wget -c https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
 	cd /home/wwwroot/default/
 	rm -rf index.html
 	git clone https://github.com/ssrpanel/ssrpanel.git tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
 	#替换数据库配置
-	#wget -N -P /home/wwwroot/default/config/ https://gitee.com/marisn/ssrpanel-new/raw/master/database.php
-	wget -N -P /usr/local/php/etc/ https://gitee.com/marisn/ssrpanel-new/raw/master/php.ini
-	wget -N -P /usr/local/nginx/conf/ https://github.com/mmmwhy/ss-panel-and-ss-py-mu/raw/master/nginx.conf
+	#wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/database.php
+	wget -N -P /usr/local/php/etc/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/php.ini
+	wget -N -P /usr/local/nginx/conf/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/nginx.conf
 	service nginx restart
 	#设置数据库
 	#mysql -uroot -proot -e"create database ssrpanel;" 
@@ -112,7 +113,7 @@ function install_ssr(){
 	chmod 0644 /var/swap
 	swapon /var/swap
 	echo '/var/swap   swap   swap   default 0 0' >> /etc/fstab
-	wget https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz
+	wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.13.tar.gz
 	tar xf libsodium-1.0.13.tar.gz && cd libsodium-1.0.13
 	./configure && make -j2 && make install
 	echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
@@ -120,14 +121,14 @@ function install_ssr(){
 	yum -y install python-setuptools
 	easy_install supervisor
     cd /root
-	wget https://gitee.com/marisn/ssrpanel-new/raw/master/ssr-3.4.0.zip
+	wget https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/ssr-3.4.0.zip
 	unzip ssr-3.4.0.zip
 	cd shadowsocksr
 	./setup_cymysql.sh
 	./initcfg.sh
-	wget -N -P /root/shadowsocksr/ https://gitee.com/marisn/ssrpanel-new/raw/master/user-config.json
-	wget -N -P /root/shadowsocksr/ https://gitee.com/marisn/ssrpanel-new/raw/master/userapiconfig.py
-	wget -N -P /root/shadowsocksr/ https://gitee.com/marisn/ssrpanel-new/raw/master/usermysql.json
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/user-config.json
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/userapiconfig.py
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/usermysql.json
 	sed -i "s#Userip#${Userip}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbuser#${Dbuser}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbport#${Dbport}#" /root/shadowsocksr/usermysql.json
