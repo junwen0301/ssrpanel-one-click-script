@@ -15,6 +15,7 @@
 
 一键脚本：
 
-```
-wget --no-check-certificate https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/rpanel.sh&&chmod +x ssrpanel.sh&&bash ssrpanel.sh
-```
+```wget --no-check-certificate https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/srrpanel.sh&&chmod +x ssrpanel.sh&&bash ssrpanel.sh```
+
+更多问题访问：<a href="https://blog.67cc.cn/archives/new-ss-panel-ssrpanel-one-click-script-version.html">https://blog.67cc.cn/archives/new-ss-panel-ssrpanel-one-click-script-version.html</a>
+
