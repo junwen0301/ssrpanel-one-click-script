@@ -16,5 +16,5 @@
 一键脚本：
 
 ```
-wget --no-check-certificate https://gitee.com/marisn/ssrpanel-new/raw/master/ssrpanel.sh&&chmod +x ssrpanel.sh&&bash ssrpanel.sh
+wget --no-check-certificat https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/rpanel.sh&&chmod +x ssrpanel.sh&&bash ssrpanel.sh
 ```
