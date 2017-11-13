@@ -8,6 +8,7 @@ function install_ssrpanel(){
 	yum -y remove httpd
 	yum install -y unzip zip git
 	wget -c https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
+	wget -c https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/php-7.1.7.tar.bz2 && tar -jxvf php-7.1.7.tar.bz2 && cd /root/php-7.1.7/ext/fileinfo && /usr/local/php/bin/phpize && ./configure --with-php-config=/usr/local/php/bin/php-config --with-fileinfo && make && make install
 	cd /home/wwwroot/default/
 	rm -rf index.html
 	git clone https://github.com/ssrpanel/ssrpanel.git tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
