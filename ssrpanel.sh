@@ -36,7 +36,6 @@ flush privileges;
 EOF
 	#安装依赖
 	cd /home/wwwroot/default/
-	if [ ! -f "$myFile" ]; then
 	php composer.phar install
 	php artisan key:generate
     chown -R www:www storage/
