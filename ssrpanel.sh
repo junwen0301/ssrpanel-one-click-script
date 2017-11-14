@@ -7,12 +7,33 @@
 function install_ssrpanel(){
 	yum -y remove httpd
 	yum install -y unzip zip git
+	#自动选择下载节点
+	GIT='raw.githubusercontent.com'
+	MY='gitee.com'
+	GIT_PING=`ping -c 1 -w 1 $GIT|grep time=|awk '{print $7}'|sed "s/time=//"`
+	MY_PING=`ping -c 1 -w 1 $MY|grep time=|awk '{print $7}'|sed "s/time=//"`
+	echo "$GIT_PING $GIT" > ping.pl
+	echo "$MY_PING $MY" >> ping.pl
+	fileinfo=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
+	if [ "$fileinfo" == "$GIT" ];then
+		fileinfo='https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/fileinfo.zip'
+	else
+		fileinfo='https://gitee.com/marisn/ssrpanel-new/raw/master/fileinfo.zip'
+	fi
+	rm -f ping.pl	
 	wget -c https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
 	clear
 	#安装fileinfo必须组件
-	wget --no-check-certificate https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/fileinfo.zip && unzip fileinfo.zip && cd /root/fileinfo && /usr/local/php/bin/phpize && ./configure --with-php-config=/usr/local/php/bin/php-config --with-fileinfo && make && make install
-	cd /home/wwwroot/default/
-	rm -rf index.html
+	cd /root && wget --no-check-certificate $fileinfo
+	File="/root/fileinfo.zip"
+    if [ ! -f "$File" ]; then  
+    echo "fileinfo.zip download be fail,please check the /root/fileinfo.zip"
+	exit 0;
+	else
+    unzip fileinfo.zip
+    fi
+	cd /root/fileinfo && /usr/local/php/bin/phpize && ./configure --with-php-config=/usr/local/php/bin/php-config --with-fileinfo && make && make install
+	cd /home/wwwroot/default/ && rm -rf index.html
 	git clone https://github.com/ssrpanel/ssrpanel.git tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
 	#替换数据库配置
 	#wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/database.php
@@ -118,7 +139,21 @@ function install_ssr(){
 	chmod 0644 /var/swap
 	swapon /var/swap
 	echo '/var/swap   swap   swap   default 0 0' >> /etc/fstab
-	wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.13.tar.gz
+	#自动选择下载节点
+	GIT='raw.githubusercontent.com'
+	LIB='download.libsodium.org'
+	GIT_PING=`ping -c 1 -w 1 $GIT|grep time=|awk '{print $7}'|sed "s/time=//"`
+	LIB_PING=`ping -c 1 -w 1 $LIB|grep time=|awk '{print $7}'|sed "s/time=//"`
+	echo "$GIT_PING $GIT" > ping.pl
+	echo "$LIB_PING $LIB" >> ping.pl
+	libAddr=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
+	if [ "$libAddr" == "$GIT" ];then
+		libAddr='https://raw.githubusercontent.com/echo-marisn/ssrv3-one-click-script/master/libsodium-1.0.13.tar.gz'
+	else
+		libAddr='https://download.libsodium.org/libsodium/releases/libsodium-1.0.13.tar.gz'
+	fi
+	rm -f ping.pl
+	wget --no-check-certificate $libAddr
 	tar xf libsodium-1.0.13.tar.gz && cd libsodium-1.0.13
 	./configure && make -j2 && make install
 	echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
