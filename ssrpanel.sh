@@ -243,6 +243,7 @@ function install_RS(){
      wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh && bash serverspeeder.sh
 }
 function Uninstall_Aliyun(){
+yum -y install redhat-lsb
 var=`lsb_release -a | grep Gentoo`
 if [ -z "${var}" ]; then 
 	var=`cat /etc/issue | grep Gentoo`
