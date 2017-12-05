@@ -36,7 +36,7 @@ function install_ssrpanel(){
 	cd /home/wwwroot/default/ && rm -rf index.html
 	git clone https://github.com/ssrpanel/ssrpanel.git tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
 	#替换数据库配置
-	#wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/database.php
+	wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/database.php
 	wget -N -P /usr/local/php/etc/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/php.ini
 	wget -N -P /usr/local/nginx/conf/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/nginx.conf
 	service nginx restart
