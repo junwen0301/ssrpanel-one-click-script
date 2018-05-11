@@ -16,12 +16,12 @@ function install_ssrpanel(){
 	echo "$MY_PING $MY" >> ping.pl
 	fileinfo=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
 	if [ "$fileinfo" == "$GIT" ];then
-		fileinfo='https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/fileinfo.zip'
+		fileinfo='https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/fileinfo.zip'
 	else
 		fileinfo='https://gitee.com/marisn/ssrpanel-new/raw/master/fileinfo.zip'
 	fi
 	rm -f ping.pl	
-	wget -c https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
+	wget -c https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
 	clear
 	#安装fileinfo必须组件
 	cd /root && wget --no-check-certificate $fileinfo
@@ -36,9 +36,9 @@ function install_ssrpanel(){
 	cd /home/wwwroot/default/ && rm -rf index.html
 	git clone https://github.com/ssrpanel/ssrpanel.git tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
 	#替换数据库配置
-	wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/database.php
-	wget -N -P /usr/local/php/etc/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/php.ini
-	wget -N -P /usr/local/nginx/conf/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/nginx.conf
+	wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/database.php
+	wget -N -P /usr/local/php/etc/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/php.ini
+	wget -N -P /usr/local/nginx/conf/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/nginx.conf
 	service nginx restart
 	#设置数据库
 	#mysql -uroot -proot -e"create database ssrpanel;" 
@@ -85,7 +85,7 @@ EOF
 	echo "# One click Install ssrpanel successed                             #"
 	echo "# Author: marisn          Ssrpanel:ssrpanel                        #"
 	echo "# Blog: http://blog.67cc.cn/                                       #"
-	echo "# Github: https://github.com/echo-marisn/ssrpanel-one-click-script #"
+	echo "# Github: https://github.com/junwen0301/ssrpanel-one-click-script #"
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 }
 function install_log(){
@@ -148,7 +148,7 @@ function install_ssr(){
 	echo "$LIB_PING $LIB" >> ping.pl
 	libAddr=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
 	if [ "$libAddr" == "$GIT" ];then
-		libAddr='https://raw.githubusercontent.com/echo-marisn/ssrv3-one-click-script/master/libsodium-1.0.13.tar.gz'
+		libAddr='https://raw.githubusercontent.com/junwen0301/ssrv3-one-click-script/master/libsodium-1.0.13.tar.gz'
 	else
 		libAddr='https://download.libsodium.org/libsodium/releases/libsodium-1.0.13.tar.gz'
 	fi
@@ -161,14 +161,14 @@ function install_ssr(){
 	yum -y install python-setuptools
 	easy_install supervisor
     cd /root
-	wget https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/ssr-3.4.0.zip
+	wget https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/ssr-3.4.0.zip
 	unzip ssr-3.4.0.zip
 	cd shadowsocksr
 	./setup_cymysql.sh
 	./initcfg.sh
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/user-config.json
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/userapiconfig.py
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/usermysql.json
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/user-config.json
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/userapiconfig.py
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/usermysql.json
 	sed -i "s#Userip#${Userip}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbuser#${Dbuser}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbport#${Dbport}#" /root/shadowsocksr/usermysql.json
@@ -232,7 +232,7 @@ function install_node(){
 	echo "# Restart the envoy's point of entry into force...                 #"
 	echo "# Author: marisn          Ssrpanel:ssrpanel                        #"
 	echo "# Blog: http://blog.67cc.cn/                                       #"
-	echo "# Github: https://github.com/echo-marisn/ssrpanel-one-click-script #"
+	echo "# Github: https://github.com/junwen0301/ssrpanel-one-click-script #"
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	reboot
 }
@@ -386,22 +386,7 @@ iptables -I INPUT -s 140.205.225.205/32 -j DROP
 iptables -I INPUT -s 140.205.225.195/32 -j DROP
 iptables -I INPUT -s 140.205.225.204/32 -j DROP
 }
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-export PATH
-ulimit -c 0
-rm -rf ssrpanel*
-clear
-echo
-Realip=`curl -s http://tools.67cc.cn/Realip/ip.php`;
-pass='blog.67cc.cn';
-echo -e "Your IP address is: $Realip "
-echo -e "Please verify the blog address: [\033[32m $pass \033[0m] "
-read inputPass
-if [ "$inputPass" != "$pass" ];then
-    #Site validation
-     echo -e "\033[31mI'm sorry for the input error.\033[0m";
-     exit 1;
-fi;
+
 clear
 echo "#############################################################################"
 echo "#Welcome to use One click Install ssrpanel and nodes scripts                #"
