@@ -198,8 +198,8 @@ function install_node(){
 	read -p "Please enter the database account (enter default root):" Dbuser
 	read -p "Please enter your database password (enter default root):" Dbpassword
 	read -p "Please enter your node number (enter default 1):  " UserNODE_ID
-	IPAddress=`wget http://members.3322.org/dyndns/getip -O - -q ; echo`;
-	Userip=${Userip:-"${IPAddress}"}
+	# IPAddress=`wget http://members.3322.org/dyndns/getip -O - -q ; echo`;
+	Userip=${Userip:-"127.0.0.1"}
 	Dbname=${Dbname:-"ssrpanel"}
 	Dbport=${Dbport:-"3306"}
 	Dbuser=${Dbuser:-"root"}
