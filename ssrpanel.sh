@@ -226,6 +226,13 @@ function install_node(){
 	ln -S ssserver.log /root/shadowsocksr/ssserver.log
     chown www:www ssserver.log
 	chmod 777 -R /home/wwwroot/default/storage/logs/
+	yum -y install ntp
+	systemctl enable ntpd
+	systemctl start ntpd
+	ntpdate -u cn.pool.ntp.org
+	timedatectl set-timezone Asia/Shanghai
+	wget -N --no-check-certificate https://raw.githubusercontent.com/junwen0301/doubi/master/ban_iptables.sh && chmod +x ban_iptables.sh
+	wget -N --no-check-certificate https://raw.githubusercontent.com/ssrpanel/ssrpanel/master/server/deploy_vnstat.sh;chmod +x deploy_vnstat.sh;./deploy_vnstat.sh
 	clear
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	echo "# Add success to the node and log on to the front site             #"
