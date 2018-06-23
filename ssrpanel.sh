@@ -134,11 +134,11 @@ function install_ssr(){
 	yum -y install python-setuptools && easy_install pip 
 	yum -y groupinstall "Development Tools" 
 	#512M chicks add 1 g of Swap
-	dd if=/dev/zero of=/var/swap bs=1024 count=1048576
-	mkswap /var/swap
-	chmod 0644 /var/swap
-	swapon /var/swap
-	echo '/var/swap   swap   swap   default 0 0' >> /etc/fstab
+	#dd if=/dev/zero of=/var/swap bs=1024 count=1048576
+	#mkswap /var/swap
+	#chmod 0644 /var/swap
+	#swapon /var/swap
+	#echo '/var/swap   swap   swap   default 0 0' >> /etc/fstab
 	#自动选择下载节点
 	GIT='raw.githubusercontent.com'
 	LIB='download.libsodium.org'
