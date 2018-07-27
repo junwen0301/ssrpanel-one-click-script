@@ -166,9 +166,6 @@ function install_ssr(){
 	cd shadowsocksr
 	./setup_cymysql.sh
 	./initcfg.sh
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/user-config.json
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/userapiconfig.py
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/usermysql.json
 	sed -i "s#Userip#${Userip}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbuser#${Dbuser}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbport#${Dbport}#" /root/shadowsocksr/usermysql.json
