@@ -210,7 +210,7 @@ function install_node(){
     # 启用supervisord
 	echo_supervisord_conf > /etc/supervisord.conf
 	sed -i '$a [program:ssr]\ncommand = python2.7 /root/shadowsocksr/server.py\nuser = root\nautostart = true\nautorestart = true\nstartsecs=3' /etc/supervisord.conf
-	supervisord
+	supervisord -c /etc/supervisord.conf
 	#iptables
 	iptables -F
 	iptables -X  
