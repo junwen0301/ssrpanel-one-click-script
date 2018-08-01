@@ -164,6 +164,10 @@ function install_ssr(){
 	wget https://raw.githubusercontent.com/junwen0301/ssrpanel-one-click-script/master/ssr-3.4.0.zip
 	unzip ssr-3.4.0.zip
 	cd shadowsocksr
+	yum install -y git
+	yum update -y nss curl
+	chmod +x setup_cymysql.sh
+	chmod +x initcfg.sh
 	./setup_cymysql.sh
 	./initcfg.sh
 	sed -i "s#Userip#${Userip}#" /root/shadowsocksr/usermysql.json
